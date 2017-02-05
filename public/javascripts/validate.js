@@ -12,7 +12,7 @@ function validation() {
 	if(username == "") {
 		errorValidate += "Username is Required\n"
 	}
-	else if(username.length < 8) {
+	else if(username.length <= 7) {
 		errorValidate += "Please input 8 or more Characters to Username\n"
 	}
 	else {
@@ -31,21 +31,7 @@ function validation() {
 		invalid++;
 	}
 
-	if(email == "") {
-		errorValidate += "Email is Required\n"
-	}
-	else {
-		invalid++
-	}
-
-	if(password == "") {
-		errorValidate += "Password is Required\n";
-	}
-	else {
-		invalid++;
-	}
-
-	if(invalid == 4) {
+	if(invalid == 2) {
 		return true;
 		invalid = 0;
 	}
@@ -65,3 +51,14 @@ function checkUserName() {
     }
     return true; //good user input
 }
+
+if (window.location.pathname === '/tedtalkslist') {
+
+	fetch('api/v1/list/count').then(function(res){
+				res.json().then(function(count){
+					console.log('count', count)
+					var banner = document.getElementById('banner-description');
+					banner.innerHTML = 'There are ' + count.count + ' tutorials available to watch!';
+				});
+			});
+	}

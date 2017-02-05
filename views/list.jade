@@ -35,7 +35,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           li
             a(href='/gallery') Category Gallery
           li.last
-            a(href='/users/logout', style='padding-left:420px') Logout
+            a(href='/auth/logout', style='padding-left:420px') Logout
     // #######################################################################################################
     .wrapper.col2
       #container.clear
@@ -80,6 +80,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   tr
                     td Number of Likes: 
                     td #{list.likes}
+                  tr
+                    td Date Created: 
+                    td #{list.created}
+                  tr
+                    td Date Updated: 
+                    td #{list.updated}
               br      
               br
               center

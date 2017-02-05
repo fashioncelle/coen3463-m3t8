@@ -11,9 +11,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var date = new Date();
+var getDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const methodOverride = require('method-override');
+const restify = require('express-restify-mongoose');
+const router = express.Router();
 
 var ObjectId = require('mongodb').ObjectId
 
@@ -28,8 +31,14 @@ mongoose.connect(MongoURI,function(err, res) {
   }
 });
 
-var app = express();
 var db;
+
+var index = require('./routes/index');
+var users = require('./routes/users');
+var auth = require('./routes/auth');
+
+var app = express();
+
 
 //var mdbUrl ="mongodb://admin:Alexandra09@ds161018.mlab.com:61018/coen3463-t8"
 
@@ -73,6 +82,12 @@ app.use(expressValidator({
   }
 }));
 
+var user = require('./models/user');
+var tedtalks = require('./models/tedtalks');
+
+restify.serve(router, tedtalks);
+app.use(router);
+
 // Connect Flash
 app.use(flash());
 
@@ -87,6 +102,7 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/auth', auth);
 app.get('/index', function(req, res){
   res.render('index')
 });
@@ -95,6 +111,14 @@ app.get('/gallery', function(req, res){
 });
 app.get('/list:listId', function(req, res){
   res.render('list')
+});
+
+
+app.use(function(req, res, next) {
+  if (!req.user) {
+    res.redirect('/auth/login')
+  }
+  next();
 });
 
 app.get('/tedtalks', function(req, res) {
@@ -130,6 +154,8 @@ app.get('/tedtalkslist', function(req, res) {
             category: req.body.category,
             views: req.body.views,
             likes: req.body.likes,
+            created: getDate,
+            updated: getDate,
             embedded: req.body.embedded,
         };
 

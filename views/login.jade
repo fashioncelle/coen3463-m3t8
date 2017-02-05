@@ -14,7 +14,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           a(href='#signup') Sign Up
       .tab-content
         #login
-          form(action='/users/login', method='post')
+          form(action='/auth/login', method='post')
             if (loginError)
               h6(style='font-size:15px', font-color:'#f44336')= loginError
             h2 Welcome Back!
@@ -31,7 +31,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
               button.button.button-block(type='submit') Log In
         #signup
           h2 Sign Up for Free
-          form(action='/users/register', method='post', onsubmit='return validation()')
+          form(action='/auth/register', method='post', onsubmit='return validation()')
             if (status)
               h6(style='font-size:15px')= status
             .top-row

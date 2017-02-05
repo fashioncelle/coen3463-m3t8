@@ -12,6 +12,8 @@ var tedtalksSchema = new Schema
         pub_date: {type: Date},
         category: {type: String},
         likes: {type: Number},
+        created: {type: String},
+        updated: {type: String},
         embedded: {type: String},
     },
     {
