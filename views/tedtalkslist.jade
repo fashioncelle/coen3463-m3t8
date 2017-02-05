@@ -5,6 +5,7 @@ block content
       #container.clear
         // #######################################################################################################
         #content
+
           h1 List of TED Talks
           br
           img.imgl(src='./images/l1.jpg', alt='', width='400', height='200')
@@ -15,9 +16,11 @@ block content
             | all topics  from science to business to global issues  in more than 110 languages.
           p
             | Meanwhile, independently run TEDx events help share ideas in communities around the world.
-          br
-          br
-          br
+          section.webdesigntuts-workshop
+            form(action='', method='')
+              input(type='search', placeholder='What TED Talks documentation are you looking for?')
+              button Search
+          
           #demo
             h1 TED Talks | Top Lists
               table.highlight.bordered.responsive-table
@@ -34,8 +37,7 @@ block content
                         a.red-text(href='/list/' + list._id) #{list.title}
                       td #{list.uploader_name}
                       td #{list.views}
-                      
-            br
+
             br
             #comments
               h2 Comments
