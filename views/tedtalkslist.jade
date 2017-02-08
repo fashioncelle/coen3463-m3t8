@@ -15,11 +15,10 @@ block content
             | all topics  from science to business to global issues  in more than 110 languages.
           p
             | Meanwhile, independently run TEDx events help share ideas in communities around the world.
-          section.webdesigntuts-workshop
+           section.webdesigntuts-workshop
             form(action='', method='')
               input(type='search', placeholder='What TED Talks documentation are you looking for?')
               button Search
-          
           #demo
         
             h1#totalCount
@@ -33,18 +32,9 @@ block content
                     th(style='width: 20%; font-size:90%') Uploader Name
                     th(style='width: 20%; font-size:90%') Number of Views
                     th(style='width: 20%; font-size:90%') Date Created
-        
-                tbody(style='font-size: 70%')
-                  for list in lists
-                    tr
-                      td
-                        a.red-text(href='/list/' + list._id) #{list.title}
-                      td #{list.uploader_name}
-                      td #{list.views}
-                      td #{list.created}
-                      
-            br
-            br
+                    
+                tbody#entry
+
             #comments
               h2 Comments
               ul.commentlist
